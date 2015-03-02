@@ -85,10 +85,10 @@ def hello():
 @app.route("/entity/<entity>", methods=['POST','PUT'])
 def update(entity):
     '''update the entities via this interface'''
-    update_vals = flask_post_json(request);
-    for k, v in update_vals.iteritems():
-        myWorld.update(entity,k,v)
-    return flask_respond_json(myWorld.get(entity))
+    update_vals = flask_post_json();
+    if (update_vals != {}):
+        myWorld.set(entity, update_vals)
+    	return flask_respond_json(myWorld.get(entity))
 
 @app.route("/world", methods=['POST','GET'])    
 def world():
@@ -105,10 +105,6 @@ def clear():
     '''Clear the world out!'''
     myWorld.clear()
     return flask_respond_json(myWorld.world())
-
-@app.route("/json2.js")
-def json2():
-    return redirect(url_for('static', filename="json2.js"))
 
 if __name__ == "__main__":
     app.run()
