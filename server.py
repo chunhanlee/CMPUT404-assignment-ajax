@@ -61,7 +61,7 @@ myWorld = World()
 
 # I give this to you, this is how you get the raw body/data portion of a post in flask
 # this should come with flask but whatever, it's not my project.
-def flask_post_json(request):
+def flask_post_json():
     '''Ah the joys of frameworks! They do so much work for you
         that they get in the way of sane operation!'''
     if (request.json != None):
@@ -72,10 +72,8 @@ def flask_post_json(request):
         return json.loads(request.form.keys()[0])
 
 
-def flask_respond_json(data):
-    response = make_response(json.dumps(data))
-    response.headers['Content-Type']='application/json'
-    return response
+def flask_respond_json():
+    return json.dumps(myWorld.world())
 
 @app.route("/")
 def hello():
@@ -85,26 +83,26 @@ def hello():
 @app.route("/entity/<entity>", methods=['POST','PUT'])
 def update(entity):
     '''update the entities via this interface'''
-    update_vals = flask_post_json();
-    if (update_vals != {}):
-        myWorld.set(entity, update_vals)
-    	return flask_respond_json(myWorld.get(entity))
+    update_vals = flask_post_json()
+    myWorld.set(entity, update_vals)
+    
+    return json.dumps(myWorld.get(entity))
 
 @app.route("/world", methods=['POST','GET'])    
 def world():
     '''you should probably return the world here'''
-    return flask_respond_json(myWorld.world())
+    return flask_respond_json()
 
 @app.route("/entity/<entity>")    
 def get_entity(entity):
     '''This is the GET version of the entity interface, return a representation of the entity'''
-    return flask_respond_json(myWorld.get(entity))
+    return json.dumps(myWorld.get(entity))
 
 @app.route("/clear", methods=['POST','GET'])
 def clear():
     '''Clear the world out!'''
     myWorld.clear()
-    return flask_respond_json(myWorld.world())
+    return flask_respond_json()
 
 if __name__ == "__main__":
     app.run()
