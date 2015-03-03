@@ -72,6 +72,7 @@ def flask_post_json():
         return json.loads(request.form.keys()[0])
 
 
+
 @app.route("/")
 def hello():
     '''Return something coherent here.. perhaps redirect to /static/index.html '''
@@ -93,6 +94,7 @@ def update(entity):
     
     return flask.jsonify(myWorld.get(entity))
 
+
 @app.route("/world", methods=['POST','GET'])    
 def world():
     '''you should probably return the world here'''
@@ -110,6 +112,7 @@ def world():
 def get_entity(entity):
     '''This is the GET version of the entity interface, return a representation of the entity'''
     return flask.jsonify(myWorld.get(entity))
+
 
 @app.route("/clear", methods=['POST','GET'])
 def clear():

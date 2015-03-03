@@ -39,11 +39,22 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
         if (xhr.readyState==4) {
             try {
                 if (xhr.status==200) {
+<<<<<<< HEAD
                     
                     var values = JSON.parse(xhr.responseText);
                     //XXX: Pass the data to the callback!
                     
                     callback();
+=======
+                    //XXX: parse some JSON from the request!
+                    if callback{
+			callback(JSON.parse(xhr.responseText));
+		    
+		    }
+			
+		    
+		    }
+>>>>>>> 69f4d2497724e767f6d56fafe1c281ec357068cb
                 }
                 
             }
@@ -55,7 +66,7 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
     //XXX: POST to a URL
     xhr.open('POST', url);
     //XXX: set the mimetype and the accept headers!
-    xhr.setRequestHeader('Accept','application/json');
+    xhr.setRequestHeader('Accept','*/*');
     xhr.setRequestHeader('Content-Type','application/json');
     // Remember to use application/json !
     xhr.send(JSON.stringify(objects));
