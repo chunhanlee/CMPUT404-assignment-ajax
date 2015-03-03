@@ -82,14 +82,35 @@ function getJSONRequest(url, callback) {
 function drawCircle(context,entity) {
     with(context) {
         beginPath();              
-        lineWidth = 3;
+        lineWidth = 8;
         var x = entity["x"];
         var y = entity["y"];
         //moveTo(x,y);
         fillStyle = entity["colour"];
         strokeStyle = fillStyle;
-        arc(x, y, (entity["radius"])?entity["radius"]:50, 0, 2.0 * Math.PI, false);  
-        stroke();                                
+        arc(x, y, (entity["radius"])?entity["radius"]:50, 0, 2.0 * Math.PI, false); 
+	stroke();
+	
+	beginPath();              
+        lineWidth = 8;
+        var x = entity["x"];
+        var y = entity["y"];
+        //moveTo(x,y);
+        fillStyle = entity["colour"];
+        strokeStyle = fillStyle;
+        arc(x+50,y, 50, 2.0 * Math.PI, false)
+        stroke();
+	
+	beginPath();              
+        lineWidth = 8;
+        var x = entity["x"];
+        var y = entity["y"];
+        //moveTo(x,y);
+        fillStyle = entity["colour"];
+        strokeStyle = fillStyle;
+        arc(x+25,y-42, 50, 2.0 * Math.PI, false)
+        stroke();
+	
     }
 }
 
