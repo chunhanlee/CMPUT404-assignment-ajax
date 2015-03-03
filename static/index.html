@@ -31,6 +31,7 @@ var context = canvas.getContext("2d");
 var W = canvas.width  = window.innerWidth-6;
 var H = canvas.height = window.innerHeight-50;
 
+world = {};
 
 function sendJSONXMLHTTPRequest(url, objects, callback) {
     var xhr = new XMLHttpRequest();
@@ -39,14 +40,10 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
         if (xhr.readyState==4) {
             try {
                 if (xhr.status==200) {
-                    
                     var values = JSON.parse(xhr.responseText);
                     //XXX: Pass the data to the callback!
-                    
                     callback();
-
                 }
-                
             }
             catch(e) {
                 alert('Error: ' + e.name);
@@ -56,7 +53,6 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
     //XXX: POST to a URL
     xhr.open('POST', url);
     //XXX: set the mimetype and the accept headers!
-    xhr.setRequestHeader('Accept','*/*');
     xhr.setRequestHeader('Content-Type','application/json');
     // Remember to use application/json !
     xhr.send(JSON.stringify(objects));
@@ -83,7 +79,7 @@ function getJSONRequest(url, callback) {
 }
     
 
-world = {};
+
 
 //XXX: TODO Make this prettier!
 function drawCircle(context,entity) {
