@@ -78,9 +78,6 @@ function getJSONRequest(url, callback) {
     xhr.send();
 }
     
-
-
-
 //XXX: TODO Make this prettier!
 function drawCircle(context,entity) {
     with(context) {
@@ -289,7 +286,7 @@ mouse.mousedraggers.push(function(x,y,clicked,e) {
 function update() {
     drawNextFrame();
     
-    sendJSONGETRequest("/world", drawFrame);
+    getJSONRequest("/world", drawFrame);
     
     drawNextFrame();
     drawFrame();
